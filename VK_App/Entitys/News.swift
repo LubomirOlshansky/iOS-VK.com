@@ -14,9 +14,14 @@ import SwiftyJSON
 class News: Object {
     @objc  dynamic var type = ""
     @objc  dynamic var text = ""
+    @objc  dynamic var autorName = ""
+    @objc  dynamic var autorPhoto = ""
+    @objc  dynamic var image = ""
+    @objc  dynamic var reposts = 0
     @objc  dynamic var comments = 0
     @objc  dynamic var likes = 0
-    @objc  dynamic var reposts = 0
+    @objc  dynamic var views = 0
+    
     
     convenience init(json: JSON) {
         self.init()
@@ -25,6 +30,8 @@ class News: Object {
         self.comments = json["comments"]["count"].intValue
         self.likes = json["likes"]["count"].intValue
         self.reposts = json["reposts"]["count"].intValue
+        self.views = json["views"]["count"].intValue
+        self.image = json["attachments"]["photo"]["photo_130"].stringValue
         
         
         

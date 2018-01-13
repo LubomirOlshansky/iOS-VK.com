@@ -12,7 +12,7 @@ import RealmSwift
 class UserFriendListController: UITableViewController {
     
     let userFriendListService = UserFriendListService()
-   var token: NotificationToken?
+    var token: NotificationToken?
     var responce: Results<FriendRealm>!
     
     override func viewDidLoad() {
@@ -20,10 +20,10 @@ class UserFriendListController: UITableViewController {
         
         pairTableAndRealm()
         userFriendListService.loadFriendsData()
-        }
+    }
     
     func pairTableAndRealm() {
-       guard let realm = try? Realm() else { return }
+        guard let realm = try? Realm() else { return }
         responce = realm.objects(FriendRealm.self)
         
         token = responce.observe { [weak self] (changes: RealmCollectionChange) in
@@ -48,7 +48,7 @@ class UserFriendListController: UITableViewController {
             }
         }
     }
-  
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -60,6 +60,7 @@ class UserFriendListController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserFriendListCell", for: indexPath) as! UserFriendListCell
         
         cell.friendName.text = responce[indexPath.row].name + " " + responce[indexPath.row].surname
+        print(responce[indexPath.row].name)
         
         cell.contentView.backgroundColor = UIColor.darkGray
         cell.backgroundColor = UIColor.darkGray
